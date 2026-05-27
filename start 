@@ -1,0 +1,58 @@
+@echo off
+setlocal
+cd /d "%~dp0"
+set "HERE=%~dp0"
+title Victus AI - JARVIS Final Setup
+
+echo.
+echo   ==========================================
+echo        VICTUS AI - FINAL SYSTEM v5.0
+echo   ==========================================
+echo.
+
+set "PATH=%USERPROFILE%\AppData\Local\Programs\Python\Python311;%USERPROFILE%\AppData\Local\Programs\Python\Python311\Scripts;%PATH%"
+
+echo [1/5] Checking Python...
+python --version
+if %ERRORLEVEL% NEQ 0 (
+    echo [!] Python not found. Install Python 3.11 first.
+    pause
+    exit /b 1
+)
+echo.
+
+echo [2/5] Installing core packages...
+python -m pip install psutil SpeechRecognition PyAudio requests pypiwin32 pycaw comtypes screen_brightness_control openpyxl langdetect --quiet --no-warn-script-location
+echo [OK]
+echo.
+
+echo [3/5] Installing PyTorch + Vision AI (this may take a few minutes)...
+python -m pip install torch torchvision torchaudio pillow transformers --quiet --no-warn-script-location
+echo [OK]
+echo.
+
+echo [4/5] Starting Ollama brain...
+where ollama >nul 2>&1
+if %ERRORLEVEL% NEQ 0 (
+    echo [!] Ollama not installed. Download from https://ollama.com
+    echo [!] Then run: ollama pull tinyllama
+) else (
+    start /min ollama serve 2>nul
+    timeout /t 3 /nobreak >nul
+    echo [*] Checking AI models...
+    ollama list
+)
+echo.
+
+echo [5/5] Launching JARVIS...
+echo.
+echo   ==========================================
+echo     Say "Victus" to wake me up!
+echo   ==========================================
+echo.
+
+set HF_HUB_DISABLE_XET=1
+
+python "%HERE%assistant.py"
+
+pause
