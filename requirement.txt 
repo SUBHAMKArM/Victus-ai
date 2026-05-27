@@ -1,0 +1,13 @@
+psutil
+pyttsx3
+SpeechRecognition
+PyAudio
+requests
+pycaw
+comtypes
+screen_brightness_control
+pyautogui
+vosk
+sounddevice
+PyQt5
+flask
