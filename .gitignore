@@ -1,0 +1,77 @@
+# ==============================================================================
+# Victus AI Assistant - Comprehensive .gitignore
+# Ensures no credentials, personal chat logs, models, or temp files are committed
+# ==============================================================================
+
+# --- Environments & Secrets ---
+.env
+.env.*
+!.env.example
+*.env
+secret*
+*.pem
+*.key
+*.cert
+credentials.json
+
+# --- Python Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+
+# --- User & Assistant Data / Personal History ---
+memory.json
+failed_commands.json
+data.xlsx
+*.xlsx
+*.csv
+*.sqlite
+*.db
+
+# --- Audio Cache & Temporary Files ---
+*.mp3
+*.wav
+temp_*.mp3
+temp_*.wav
+output_*.mp3
+output_*.wav
+Untitled-*.txt
+
+# --- Speech & AI Models (Large Binary Files) ---
+vosk-model/
+vosk-model-*/
+models/
+*.gguf
+*.pt
+*.bin
+*.onnx
+*.safetensors
+
+# --- Build & PyInstaller Artifacts ---
+dist/
+build/
+*.spec
+
+# --- Logs ---
+*.log
+logs/
+
+# --- IDEs & OS Files ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+Thumbs.db
+Desktop.ini
+.DS_Store
